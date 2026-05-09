@@ -1,0 +1,74 @@
+const baseDeDatosTalleres = [
+    {
+        id: 1,
+        nombre: "Taller de Guitarra Acústica - Primer Acorde",
+        descripcion: "Clases para principiantes. Traer instrumento propio y cuaderno.",
+        rubro: "Música",
+        direccion: "Sede central Polvorines",
+        contacto: "11 5512-5034 (Gustavo), Instagram: @gusvalsk",
+        horarios: "Martes y Jueves de 14hs a 18hs",
+        lat: -34.522070,
+        lng: -58.700265,
+        imagen: "https://placehold.co/150x100?text=Guitarra"
+    },
+    {
+        id: 2,
+        nombre: "Taller de Locución - Lo de Pichón",
+        descripcion: "Taller de locución radial con equipo profesional.",
+        rubro: "Audiovisual y multimedia",
+        direccion: "José León Suárez 1999, Los Polvorines",
+        contacto: "11 4312-6537 (Marcelo)",
+        horarios: "Lunes a sábados de 10:00 a 18:00 hs",
+        lat: -34.519632,
+        lng: -58.700901,
+        imagen: "https://placehold.co/150x100?text=Microfonía"
+    },
+    {
+        id: 3,
+        nombre: "Iniciación a las Artes Teatrales",
+        descripcion: "Expresión corporal y pérdida del pánico escénico.",
+        rubro: "Artes escénicas",
+        direccion: "Romain Rolland 1950, Los Polvorines",
+        contacto: "11 8315-9182 (Viviana)",
+        horarios: "Lunes a viernes de 14:00 a 18:00 hs",
+        lat: -34.522231,
+        lng: -58.703736,
+        imagen: "https://placehold.co/150x100?text=Teatro"
+    },
+    {
+        id: 4,
+        nombre: "Taller de escritura: Horror cósmico",
+        descripcion: "Aprendé a liberar tu imaginación y plasmarla en el papel.",
+        rubro: "Escritura y literatura",
+        direccion: "Dante Alighieri 1801, Los Polvorines",
+        contacto: "11 5312-1175 (Héctor)",
+        horarios: "Lunes a sábados de 16:00 a 21:00 hs",
+        lat: -34.525498,
+        lng: -58.705617,
+        imagen: "https://placehold.co/150x100?text=Escritura"
+    },
+    {
+        id: 5,
+        nombre: "Taller de Preservación Audiovisual",
+        descripcion: "Técnicas de preservación de filmes y otro tipo de medios. Orientado a estudiantes de Artes Audiovisuales.",
+        rubro: "Audiovisual y multimedia",
+        direccion: "Sede central Polvorines",
+        contacto: "11 9053-8184 (Manolo)",
+        horarios: "Miércoles de 14 a 17 hs",
+        lat: -34.521239,
+        lng: -58.700276,
+        imagen: "https://placehold.co/150x100?text=Preservación"
+    },
+    {
+        id: 6,
+        nombre: "Taller de Cerámica - Hoponoppo",
+        descripcion: "Expresá y moldeá tus mejores creaciones",
+        rubro: "Oficios y manualidades",
+        direccion: "Sede central Polvorines",
+        contacto: "11 8912-4180 (Romina)",
+        horarios: "Viernes de 17hs a 19hs",
+        lat: -34.522020,
+        lng: -58.700164,
+        imagen: "https://placehold.co/150x100?text=Cerámica"
+    }
+];
