@@ -5,7 +5,7 @@
 </body>
 <footer>
     <div class="d-flex justify-content-center text-white bg-dark bg-opacity-50 p-3 rounded fixed-bottom">
-        Rednick Technolgies - Gabriel Nicolas Acevedo - 2026 - Reservados Todos Los Derechos
+        Rednick Technologies - Gabriel Nicolas Acevedo - 2026 - Reservados Todos Los Derechos
     </div>
 </footer>
 

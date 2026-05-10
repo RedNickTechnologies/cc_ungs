@@ -28,7 +28,7 @@ $seo_keywords = isset($page_keywords) ? $page_keywords : "páginas web, programa
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <div>
-        <nav class="navbar navbar-expand-lg navbar-info bg-info fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-info bg-ungs fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="<?php echo $base_url; ?>">
                     <img src="<?php echo $base_url; ?>/images/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">

@@ -46,3 +46,10 @@
     box-shadow: 0 0 15px rgba(13, 110, 253, 0.2) !important; /* Brillo leve */
     transform: scale(1.02); /* Se agranda apenitas */
 }
+
+/* =========================================
+   COLOR INSTITUCIONAL UNGS
+   ========================================= */
+.bg-ungs {
+    background-color: #0961a2 !important; /* Color azul extraído del logo */
+}
