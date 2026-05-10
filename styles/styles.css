@@ -3,3 +3,46 @@
      margin: 0;
      box-sizing: border-box;
  }
+
+ /* =========================================
+   MAPA DEL INDEX (DESTACADOS)
+   ========================================= */
+ #mapa-portada {
+     height: 400px;
+     width: 100%;
+     border-radius: 12px;
+     border: 2px solid #dee2e6;
+     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+     z-index: 1;
+     /* Para que no se superponga a tu nav-bar fixed-top */
+ }
+
+ /* Ajuste responsive para celulares */
+ @media (max-width: 575.98px) {
+     #mapa-portada {
+         height: 300px;
+         /* Un poco más bajo en pantallas pequeñas */
+     }
+ }
+
+ /* =========================================
+   TARJETAS INTERACTIVAS DEL MAPA (INDEX)
+   ========================================= */
+.tarjeta-taller-interactiva {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent !important;
+}
+
+.tarjeta-taller-interactiva:hover {
+    transform: translateX(5px); /* Se mueve un poquito a la derecha al pasar el mouse */
+    background-color: #f8f9fa;
+}
+
+/* Efecto de iluminación cuando está seleccionada */
+.tarjeta-seleccionada {
+    border-color: #0d6efd !important; /* Borde azul primary */
+    background-color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(13, 110, 253, 0.2) !important; /* Brillo leve */
+    transform: scale(1.02); /* Se agranda apenitas */
+}

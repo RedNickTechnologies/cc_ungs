@@ -29,22 +29,37 @@ include 'view/header.php';
     </section>
 
     <section class="container px-4 py-5" id="talleres-portada">
-        <h2 class="pb-2 border-bottom text-center mb-5">Algunas de nuestras propuestas</h2>
+        <h2 class="pb-4 text-center mb-5">Explorá nuestra red</h2>
+        <div class="p-2">
 
-        <div id="contenedor-portada" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
+            <div class="card shadow-lg border-0 rounded-3 overflow-hidden mb-5">
+                <div class="row g-0">
+
+                    <div class="col-lg-5 bg-light p-4" style="max-height: 550px; overflow-y: auto;" id="contenedor-portada">
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div id="mapa-portada" style="height: 100%; min-height: 400px; width: 100%;"></div>
+                    </div>
+
+                </div>
+            </div>
         </div>
 
-        <div class="text-center mt-5">
-            <a href="maps.php" class="btn btn-dark">Ver todos los talleres en el mapa</a>
+        <div class="text-center mt-4">
+            <a href="maps.php" class="btn btn-dark btn-lg">Ver directorio completo en el mapa</a>
         </div>
     </section>
 </main>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 <script src="scripts/talleres.js"></script>
 <script src="scripts/index.js"></script>
 <script src="scripts/form.js"></script>
 
 <?php
-
 include 'view/footer.php';
 ?>
