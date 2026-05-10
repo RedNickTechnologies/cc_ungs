@@ -28,7 +28,7 @@ $seo_keywords = isset($page_keywords) ? $page_keywords : "páginas web, programa
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-info bg-info fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="<?php echo $base_url; ?>">
                     <img src="<?php echo $base_url; ?>/images/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
@@ -39,9 +39,6 @@ $seo_keywords = isset($page_keywords) ? $page_keywords : "páginas web, programa
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="<?php echo $base_url; ?>">Inicio</a>
-                        </li>
                     </ul>
 
                     <div class="d-flex align-items-center">

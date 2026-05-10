@@ -4,7 +4,7 @@ $page_title = "Inicio";
 $page_description = "Explorá el portfolio de Red Nick Technologies. Sistemas de gestión, bases de datos y desarrollo de páginas web a medida.";
 $page_keywords = "proyectos programación, sistemas de gestión, diseño de páginas web, proyecto universitario programación";
 
-include 'view/header.php'; 
+include 'view/header.php';
 ?>
 
 <main>
@@ -19,7 +19,9 @@ include 'view/header.php';
                     <p class="lead">Creamos este espacio de colaboración para vincular a los residentes con las actividades y talleres de la zona. Descubrí nuevas propuestas o sumá tu propio emprendimiento a nuestra red.</p>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-4">
                         <a href="maps.php" class="btn btn-primary btn-lg px-4 me-md-2">Buscar Talleres</a>
-                        <a href="form.php" class="btn btn-outline-secondary btn-lg px-4">Registrar mi Taller</a>
+                        <button onclick="abrirEnModal('<?php echo $base_url; ?>/models/form.php', 'Registrar mi Taller')" class="btn btn-outline-secondary btn-lg px-4">
+                            Registrar mi Taller
+                        </button>
                     </div>
                 </div>
             </div>
@@ -28,10 +30,10 @@ include 'view/header.php';
 
     <section class="container px-4 py-5" id="talleres-portada">
         <h2 class="pb-2 border-bottom text-center mb-5">Algunas de nuestras propuestas</h2>
-        
+
         <div id="contenedor-portada" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
-            </div>
-        
+        </div>
+
         <div class="text-center mt-5">
             <a href="maps.php" class="btn btn-dark">Ver todos los talleres en el mapa</a>
         </div>
@@ -40,8 +42,9 @@ include 'view/header.php';
 
 <script src="scripts/talleres.js"></script>
 <script src="scripts/index.js"></script>
+<script src="scripts/form.js"></script>
 
 <?php
 
-include 'view/footer.php'; 
+include 'view/footer.php';
 ?>
