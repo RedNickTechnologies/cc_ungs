@@ -11,23 +11,18 @@ $seo_description = isset($page_description) ? $page_description : "Desarrollo de
 $seo_keywords = isset($page_keywords) ? $page_keywords : "páginas web, programación, educación en la programación, estudiantes de programación, desarrollo web, Buenos Aires";
 ?>
 <!DOCTYPE html>
-<html lang="es"> <!-- Cambiado a 'es' para indicar que el contenido es en español -->
-
-<head>
+<html lang="es"> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Etiquetas Meta SEO -->
     <meta name="description" content="<?php echo $seo_description; ?>">
     <meta name="keywords" content="<?php echo $seo_keywords; ?>">
     <meta name="author" content="Red Nick Technologies">
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo $base_url; ?>/styles/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Título Dinámico -->
     <title><?php echo $seo_title; ?></title>
 </head>
 
@@ -48,6 +43,13 @@ $seo_keywords = isset($page_keywords) ? $page_keywords : "páginas web, programa
                             <a class="nav-link active" aria-current="page" href="<?php echo $base_url; ?>">Inicio</a>
                         </li>
                     </ul>
+                    
+                    <div class="d-flex align-items-center">
+                        <a href="<?php echo $base_url; ?>/login.php" class="btn btn-outline-light d-flex align-items-center gap-2">
+                            <i class="bi bi-person-circle fs-5"></i> Iniciar sesión
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </nav>

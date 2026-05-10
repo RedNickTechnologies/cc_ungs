@@ -1,0 +1,43 @@
+<?php
+
+include 'view/header.php'; 
+?>
+
+<main>
+    <section class="bg-light text-dark py-5 border-bottom">
+        <div class="container col-xxl-8 px-4 py-5">
+            <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                <div class="col-10 col-sm-8 col-lg-6">
+                    <img src="https://placehold.co/600x400?text=Centro+Cultural" class="d-block mx-lg-auto img-fluid rounded shadow" alt="Centro Cultural" loading="lazy">
+                </div>
+                <div class="col-lg-6">
+                    <h1 class="display-5 fw-bold lh-1 mb-3">Conectando nuestra comunidad</h1>
+                    <p class="lead">Creamos este espacio de colaboración para vincular a los residentes con las actividades y talleres de la zona. Descubrí nuevas propuestas o sumá tu propio emprendimiento a nuestra red.</p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-4">
+                        <a href="maps.php" class="btn btn-primary btn-lg px-4 me-md-2">Buscar Talleres</a>
+                        <a href="form.php" class="btn btn-outline-secondary btn-lg px-4">Registrar mi Taller</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container px-4 py-5" id="talleres-portada">
+        <h2 class="pb-2 border-bottom text-center mb-5">Algunas de nuestras propuestas</h2>
+        
+        <div id="contenedor-portada" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
+            </div>
+        
+        <div class="text-center mt-5">
+            <a href="maps.php" class="btn btn-dark">Ver todos los talleres en el mapa</a>
+        </div>
+    </section>
+</main>
+
+<script src="scripts/talleres.js"></script>
+<script src="scripts/index.js"></script>
+
+<?php
+
+include 'view/footer.php'; 
+?>
