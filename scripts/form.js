@@ -64,13 +64,13 @@ document.addEventListener("DOMContentLoaded", function () {
                             <p>${descripcion || "No se proporcionó una descripción para este taller."}</p>
                             <br />
                             <p>
-                                <i class="fa-solid fa-tag"></i> Rubro: ${rubro} <br />
-                                <i class="fa-solid fa-user-tie"></i> Encargado/a: ${nombre} ${apellido} <br />
-                                <i class="fa-solid fa-envelope"></i> ${email} <br />
-                                <i class="fa-solid fa-phone"></i> ${telefonoTaller} <br />
-                                <i class="fa-solid fa-map"></i> ${direccion} <br />
-                                <i class="fa-brands fa-instagram"></i> @${instagramUser} <br />
-                                <i class="fa-brands fa-facebook"></i> @${facebookUser}
+                                <i class="bi bi-tag-fill"></i> Rubro: ${rubro} <br />
+                                <i class="bi bi-person-fill"></i> Encargado/a: ${nombre} ${apellido} <br />
+                                <i class="bi bi-envelope-fill"></i> ${email} <br />
+                                <i class="bi bi-telephone-fill"></i> ${telefonoTaller} <br />
+                                <i class="bi bi-map"></i> ${direccion} <br />
+                                <i class="bi bi-instagram"></i> @${instagramUser} <br />
+                                <i class="bi bi-facebook"></i> @${facebookUser}
                             </p>
                         </div>
                         <div class="img-tarjeta">
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
                               urlImagen
                                 ? `<img src="${urlImagen}" alt="Imagen de ${nombreTaller}">`
                                 : `<div style="display:flex; align-items:center; justify-content:center; height:100%; background:#e7eef4; color:#003366;">
-                                     <i class="fa-solid fa-image fa-4x"></i>
+                                     <i class="bi bi-image" style="font-size: 4rem;"></i>
                                    </div>`
                             }
                         </div>
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       pantalla.innerHTML = `
                 <div class="mensaje-exito" style="text-align: center;">
-                    <h2 style=display: inline-block;">
+                    <h2 style="display: inline-block;">
                         Solicitud de registro realizada con éxito.
                     </h2>
                     <p>Un moderador se encargará de administrar tu solicitud.</p>

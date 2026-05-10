@@ -6,7 +6,7 @@
 $base_url = "http://localhost/paginaRedNick";
 
 // Variables SEO dinámicas con valores por defecto (Fallback)
-$seo_title = isset($page_title) ? $page_title . " | Red Nick Technologies" : "Red Nick Technologies";
+$seo_title = isset($page_title) ? $page_title . " | Centro Cultural General Sarmiento" : "Centro Cultural General Sarmiento";
 $seo_description = isset($page_description) ? $page_description : "Desarrollo de páginas web, educación en programación, y proyectos de sistemas. Orientado a estudiantes y graduados.";
 $seo_keywords = isset($page_keywords) ? $page_keywords : "páginas web, programación, educación en la programación, estudiantes de programación, desarrollo web, Buenos Aires";
 ?>
