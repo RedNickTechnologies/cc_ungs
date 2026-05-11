@@ -18,8 +18,7 @@ include 'view/header.php';
                     <h1 class="display-5 fw-bold lh-1 mb-3">Conectando nuestra comunidad</h1>
                     <p class="lead">Creamos este espacio de colaboración para vincular a los residentes con las actividades y talleres de la zona. Descubrí nuevas propuestas o sumá tu propio emprendimiento a nuestra red.</p>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-4">
-                        <a href="<?php echo $base_url; ?>/models/maps.php" class="btn btn-primary btn-lg px-4 me-md-2">Buscar Talleres</a>
-                        <button onclick="abrirEnModal('<?php echo $base_url; ?>/models/form.php', 'Registrar mi Taller')" class="btn btn-outline-secondary btn-lg px-4">
+                        <button onclick="abrirEnModal('<?php echo $base_url; ?>/models/form.php', 'Registrar mi Taller')" class="btn btn-primary btn-lg px-4">
                             Registrar mi Taller
                         </button>
                     </div>
