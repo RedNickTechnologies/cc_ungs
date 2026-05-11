@@ -18,7 +18,7 @@ include 'view/header.php';
                     <h1 class="display-5 fw-bold lh-1 mb-3">Conectando nuestra comunidad</h1>
                     <p class="lead">Creamos este espacio de colaboración para vincular a los residentes con las actividades y talleres de la zona. Descubrí nuevas propuestas o sumá tu propio emprendimiento a nuestra red.</p>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-4">
-                        <a href="maps.php" class="btn btn-primary btn-lg px-4 me-md-2">Buscar Talleres</a>
+                        <a href="<?php echo $base_url; ?>/models/maps.php" class="btn btn-primary btn-lg px-4 me-md-2">Buscar Talleres</a>
                         <button onclick="abrirEnModal('<?php echo $base_url; ?>/models/form.php', 'Registrar mi Taller')" class="btn btn-outline-secondary btn-lg px-4">
                             Registrar mi Taller
                         </button>
@@ -29,27 +29,41 @@ include 'view/header.php';
     </section>
 
     <section class="container px-4 py-5" id="talleres-portada">
-        <h2 class="pb-4 text-center mb-5">Explorá nuestra red</h2>
-        <div class="p-2">
-
-            <div class="card shadow-lg border-0 rounded-3 overflow-hidden mb-5">
-                <div class="row g-0">
-
-                    <div class="col-lg-5 bg-light p-4" style="max-height: 550px; overflow-y: auto;" id="contenedor-portada">
+    <h2 class="pb-4 text-center mb-5">Nuestros Talleres</h2>
+    
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-10">
+            <div class="card p-3 shadow-sm border-0 bg-light">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0"><i class="bi bi-search"></i></span>
+                            <input type="text" id="buscador-index" class="form-control border-start-0" placeholder="Buscar por nombre o rubro...">
+                        </div>
                     </div>
-
-                    <div class="col-lg-7">
-                        <div id="mapa-portada" style="height: 100%; min-height: 400px; width: 100%;"></div>
+                    <div class="col-md-6 d-flex gap-2">
+                        <button id="btn-destacados" class="btn btn-primary flex-fill fw-bold">
+                            <i class="bi bi-star-fill"></i> Talleres destacados
+                        </button>
+                        <button id="btn-todos" class="btn btn-outline-primary flex-fill fw-bold">
+                            <i class="bi bi-list-ul"></i> Mostrar todos
+                        </button>
                     </div>
-
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="text-center mt-4">
-            <a href="maps.php" class="btn bg-ungs text-white btn-lg">Haga click aqui para mas información</a>
+    <div class="card shadow-lg border-0 rounded-3 overflow-hidden mb-5">
+        <div class="row g-0">
+            <div class="col-lg-5 bg-white p-4" style="max-height: 550px; overflow-y: auto;" id="contenedor-portada">
+                </div>
+            <div class="col-lg-7">
+                <div id="mapa-portada" style="height: 100%; min-height: 450px; width: 100%;"></div>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 </main>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />

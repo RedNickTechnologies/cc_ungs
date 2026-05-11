@@ -1,12 +1,9 @@
 let mapaInicio;
-let marcadores = {}; // Guardamos los marcadores para poder abrirlos desde las tarjetas
+let marcadores = {};
+let listaActual = []; // Aquí guardaremos los talleres que se están mostrando (los 4 o todos)
 
-function cargarMapaPortada(talleresSeleccionados) {
-    if (mapaInicio) {
-        mapaInicio.remove();
-    }
-
-    // Coordenadas generales (ej. UNGS / Los Polvorines)
+function cargarMapaPortada(talleresAMostrar) {
+    if (mapaInicio) { mapaInicio.remove(); }
     mapaInicio = L.map('mapa-portada').setView([-34.522064, -58.700252], 13);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -14,72 +11,88 @@ function cargarMapaPortada(talleresSeleccionados) {
         attribution: '&copy; OpenStreetMap'
     }).addTo(mapaInicio);
 
-    marcadores = {}; // Vaciamos los marcadores anteriores
-
-    talleresSeleccionados.forEach(taller => {
+    marcadores = {};
+    talleresAMostrar.forEach(taller => {
         let marker = L.marker([taller.lat, taller.lng]).addTo(mapaInicio);
         marker.bindPopup(`<b>${taller.nombre}</b><br><i class="bi bi-tag-fill"></i> ${taller.rubro}`);
-        marcadores[taller.id] = marker; // Relacionamos el ID del taller con su marcador en el mapa
+        marcadores[taller.id] = marker;
     });
 }
 
-// Nueva función que se ejecuta al hacer clic en una tarjeta
 function enfocarTaller(idTaller, lat, lng) {
-    // 1. Apagamos todas las tarjetas
-    document.querySelectorAll('.tarjeta-taller-interactiva').forEach(tarjeta => {
-        tarjeta.classList.remove('tarjeta-seleccionada');
-    });
+    document.querySelectorAll('.tarjeta-taller-interactiva').forEach(t => t.classList.remove('tarjeta-seleccionada'));
+    const tarjeta = document.getElementById(`tarjeta-index-${idTaller}`);
+    if (tarjeta) tarjeta.classList.add('tarjeta-seleccionada');
 
-    // 2. Iluminamos solo la que recibió el clic
-    const tarjetaActiva = document.getElementById(`tarjeta-index-${idTaller}`);
-    if (tarjetaActiva) {
-        tarjetaActiva.classList.add('tarjeta-seleccionada');
-    }
-
-    // 3. Movemos el mapa suavemente (flyTo) hacia las coordenadas y abrimos el popup
     if (mapaInicio && marcadores[idTaller]) {
-        mapaInicio.flyTo([lat, lng], 15, { animate: true, duration: 1.5 });
+        mapaInicio.flyTo([lat, lng], 16);
         marcadores[idTaller].openPopup();
     }
 }
 
-async function cargarTalleresPortada() {
-    let copiaTalleres = [...baseDeDatosTalleres];
-    
-    // Elegimos 4 al azar
-    const talleresMezclados = copiaTalleres.sort(() => 0.5 - Math.random());
-    const talleresSeleccionados = talleresMezclados.slice(0, 4);
-
+function renderizarLista(talleres) {
     const contenedor = document.getElementById("contenedor-portada");
-    
-    // Título de la columna izquierda
-    contenedor.innerHTML = `<h3 class="mb-4 text-center border-bottom pb-3">Propuestas Destacadas</h3>`;
+    contenedor.innerHTML = "";
 
-    talleresSeleccionados.forEach(taller => {
-        // Tarjeta rediseñada a formato horizontal para la columna izquierda
-        // Le pasamos las coordenadas en el evento onclick
-        let htmlTarjeta = `
-            <div class="card mb-3 shadow-sm tarjeta-taller-interactiva" id="tarjeta-index-${taller.id}" onclick="enfocarTaller('${taller.id}', ${taller.lat}, ${taller.lng})">
-                <div class="row g-0 h-100">
+    if (talleres.length === 0) {
+        contenedor.innerHTML = '<p class="text-center text-muted mt-5">No se encontraron resultados.</p>';
+        return;
+    }
+
+    talleres.forEach(taller => {
+        contenedor.innerHTML += `
+            <div class="card mb-3 tarjeta-taller-interactiva" id="tarjeta-index-${taller.id}" onclick="enfocarTaller('${taller.id}', ${taller.lat}, ${taller.lng})">
+                <div class="row g-0">
                     <div class="col-4">
-                        <img src="${taller.imagen}" class="img-fluid rounded-start h-100 w-100" alt="Imagen de ${taller.nombre}" style="object-fit: cover; min-height: 120px;">
+                        <img src="${taller.imagen}" class="img-fluid rounded-start h-100" style="object-fit: cover; min-height: 100px;">
                     </div>
                     <div class="col-8">
-                        <div class="card-body py-2 px-3 d-flex flex-column justify-content-center">
-                            <h6 class="card-title text-primary fw-bold mb-1">${taller.nombre}</h6>
-                            <p class="card-text text-muted small mb-1 text-truncate">${taller.descripcion}</p>
-                            <div class="mt-auto">
-                                <p class="mb-0 small" style="font-size: 0.8rem;"><i class="bi bi-geo-alt-fill text-danger"></i> ${taller.direccion}</p>
-                            </div>
+                        <div class="card-body p-2">
+                            <h6 class="card-title text-primary fw-bold mb-1" style="font-size: 0.9rem;">${taller.nombre}</h6>
+                            <p class="card-text small mb-1 text-muted">${taller.rubro}</p>
+                            <p class="mb-0" style="font-size: 0.75rem;"><i class="bi bi-geo-alt-fill text-danger"></i> ${taller.direccion}</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        `;
-        contenedor.innerHTML += htmlTarjeta;
+            </div>`;
     });
-
-    cargarMapaPortada(talleresSeleccionados);
+    cargarMapaPortada(talleres);
 }
 
-document.addEventListener("DOMContentLoaded", cargarTalleresPortada);
+// Lógica de los botones y buscador
+document.addEventListener("DOMContentLoaded", () => {
+    const btnDestacados = document.getElementById('btn-destacados');
+    const btnTodos = document.getElementById('btn-todos');
+    const buscador = document.getElementById('buscador-index');
+
+    // Función para mostrar solo 4 destacados
+    const mostrarDestacados = () => {
+        btnDestacados.classList.replace('btn-outline-primary', 'btn-primary');
+        btnTodos.classList.replace('btn-primary', 'btn-outline-primary');
+        listaActual = [...baseDeDatosTalleres].sort(() => 0.5 - Math.random()).slice(0, 4);
+        renderizarLista(listaActual);
+    };
+
+    // Función para mostrar todo el directorio
+    const mostrarTodos = () => {
+        btnTodos.classList.replace('btn-outline-primary', 'btn-primary');
+        btnDestacados.classList.replace('btn-primary', 'btn-outline-primary');
+        listaActual = [...baseDeDatosTalleres];
+        renderizarLista(listaActual);
+    };
+
+    btnDestacados.addEventListener('click', mostrarDestacados);
+    btnTodos.addEventListener('click', mostrarTodos);
+
+    buscador.addEventListener('input', (e) => {
+        const busqueda = e.target.value.toLowerCase();
+        const filtrados = listaActual.filter(t => 
+            t.nombre.toLowerCase().includes(busqueda) || 
+            t.rubro.toLowerCase().includes(busqueda)
+        );
+        renderizarLista(filtrados);
+    });
+
+    // Carga inicial
+    mostrarDestacados();
+});

@@ -7,7 +7,7 @@ $es_ajax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP
 
 // Solo incluimos el header si se accede directamente a la página
 if (!$es_ajax) {
-    include_once 'view/header.php'; 
+    include 'view/header.php'; 
 }
 ?>
 
@@ -109,6 +109,6 @@ if (!$es_ajax) {
 
 <?php
 if (!$es_ajax) {
-    include_once 'view/footer.php'; 
+    include 'view/footer.php'; 
 }
 ?>
