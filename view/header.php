@@ -1,6 +1,9 @@
 <?php
-// Define la URL base de tu proyecto
+// Local
 $base_url = "http://localhost/cc_ungs";
+
+// Web
+//$base_url = "https://rednick.com.ar/cc_ungs";
 
 $seo_title = isset($page_title) ? $page_title . " | Centro Cultural General Sarmiento" : "Centro Cultural General Sarmiento";
 $seo_description = isset($page_description) ? $page_description : "Desarrollo de páginas web, educación en programación, y proyectos de sistemas. Orientado a estudiantes y graduados.";
@@ -28,10 +31,10 @@ $seo_keywords = isset($page_keywords) ? $page_keywords : "páginas web, programa
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <div>
-        <nav class="navbar navbar-expand-lg navbar-info bg-ungs fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-ungs fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="<?php echo $base_url; ?>">
-                    <img src="<?php echo $base_url; ?>/images/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                    <img src="<?php echo $base_url; ?>/images/logoUNGS.ico" alt="" width="30" height="24" class="d-inline-block align-text-top">
                     Centro Cultural General Sarmiento
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +52,7 @@ $seo_keywords = isset($page_keywords) ? $page_keywords : "páginas web, programa
                 </div>
             </div>
         </nav>
-        
+
         <?php include 'modal.php'; ?>
         <script src="<?php echo $base_url; ?>/scripts/navegacion-modal.js"></script>
     </div>

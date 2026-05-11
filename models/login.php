@@ -13,16 +13,14 @@ if (!$es_ajax) {
 ?>
 
 <main class="container py-4">
-    <div class="d-flex justify-content-center">
-        <div class="col-md-8">
+    <div class="d-flex justify-content-center login-bg-container shadow-lg">
+        <div class="col-md-10">
             
-            <h3 class="text-center">Bienvenido al Sistema</h3>
-            
-            <div class="alert alert-info mt-3 text-start">
+            <div class="mt-3 text-start">
                 <form>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">E-mail</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="usuario@ejemplo.com">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Contraseña</label>
@@ -32,9 +30,10 @@ if (!$es_ajax) {
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Recuérdame</label>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+                    <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Ingresar</button>
                 </form>
             </div>
+            
         </div>
     </div>
 </main>

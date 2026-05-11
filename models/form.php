@@ -12,9 +12,9 @@ if (!$es_ajax) {
 ?>
 
 <main class="container mt-5 py-4">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center form-bg-container">
         <div class="col-lg-10">
-            <h2 class="mb-4 text-center">Registrar un Nuevo Taller</h2>
+            <h2 class="mb-4 text-center text-white">Registrar un Nuevo Taller</h2>
             <p class="text-muted text-center mb-4">Completá el formulario para sumar tu taller a la comunidad del centro cultural.</p>
 
             <form id="registroFormulario" enctype="multipart/form-data" class="card p-4 shadow-sm border-0 bg-light">

@@ -8,7 +8,7 @@ include 'view/header.php';
 ?>
 
 <main>
-    <section class="bg-light text-dark py-5 border-bottom">
+    <section class="bg-dark text-white py-5 border-bottom form-bg-container">
         <div class="container col-xxl-8 px-4 py-5">
             <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
                 <div class="col-10 col-sm-8 col-lg-6">
@@ -47,7 +47,7 @@ include 'view/header.php';
         </div>
 
         <div class="text-center mt-4">
-            <a href="maps.php" class="btn btn-dark btn-lg">Ver directorio completo en el mapa</a>
+            <a href="maps.php" class="btn bg-ungs text-white btn-lg">Haga click aqui para mas información</a>
         </div>
     </section>
 </main>

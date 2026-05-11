@@ -14,7 +14,7 @@
      border: 2px solid #dee2e6;
      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
      z-index: 1;
-     /* Para que no se superponga a tu nav-bar fixed-top */
+     /* permite que el elemento no se superponga con la barra del navegador */
  }
 
  /* Ajuste responsive para celulares */
@@ -35,16 +35,16 @@
 }
 
 .tarjeta-taller-interactiva:hover {
-    transform: translateX(5px); /* Se mueve un poquito a la derecha al pasar el mouse */
+    transform: translateX(5px); /* Al posicionar el mouse arriba, se eleva ligeramente */
     background-color: #f8f9fa;
 }
 
-/* Efecto de iluminación cuando está seleccionada */
+/* Efecto de iluminación de las tarjetas seleccionadas */
 .tarjeta-seleccionada {
     border-color: #0d6efd !important; /* Borde azul primary */
     background-color: #ffffff !important;
     box-shadow: 0 0 15px rgba(13, 110, 253, 0.2) !important; /* Brillo leve */
-    transform: scale(1.02); /* Se agranda apenitas */
+    transform: scale(1.02); /* Realiza un pequeño zoom */
 }
 
 /* =========================================
@@ -52,4 +52,34 @@
    ========================================= */
 .bg-ungs {
     background-color: #0961a2 !important; /* Color azul extraído del logo */
+}
+
+/* =========================================
+   FONDO DEL LOGIN UNGS
+   ========================================= */
+.login-bg-container {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                      url('../images/loginBG.png'); /* Asegurate de que la ruta sea correcta */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 80vh; /* Ajusta la altura para que se vea la imagen */
+    border-radius: 15px;
+    padding: 40px;
+    color: white; /* Para que el texto resalte sobre la imagen oscura */
+}
+
+/* =========================================
+   FONDO DEL LOGIN UNGS
+   ========================================= */
+.form-bg-container {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                      url('../images/loginBG.png'); /* Asegurate de que la ruta sea correcta */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 80vh; /* Ajusta la altura para que se vea la imagen */
+    border-radius: 15px;
+    padding: 40px;
+    color: black; /* Para que el texto resalte sobre la imagen oscura */
 }
