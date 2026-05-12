@@ -1,24 +1,23 @@
 <?php
-// Variables SEO dinámicas
 $page_title = "Registro de Taller";
-
-// Detectamos si la petición es por AJAX (desde el modal)
 $es_ajax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
 
-// Solo incluimos el header si se accede directamente a la página
 if (!$es_ajax) {
-    include 'view/header.php'; 
+    include 'view/header.php';
+    // Si entran directo (sin modal), cargamos Leaflet por si acaso
+    echo '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>';
+    echo '<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>';
 }
 ?>
 
 <main class="container mt-5 py-4">
     <div class="row justify-content-center form-bg-container">
-        <div class="col-lg-10">
+        <div class="col-lg-20">
             <h2 class="mb-4 text-center text-white">Registrar un Nuevo Taller</h2>
             <p class="text-muted text-center mb-4">Completá el formulario para sumar tu taller a la comunidad del centro cultural.</p>
 
             <form id="registroFormulario" enctype="multipart/form-data" class="card p-4 shadow-sm border-0 bg-light">
-                
+
                 <h4 class="mb-3 border-bottom pb-2">Datos del Colaborador</h4>
                 <div class="row g-3 mb-4 text-start">
                     <div class="col-md-6">
@@ -67,20 +66,54 @@ if (!$es_ajax) {
                     </div>
                 </div>
 
-                <h4 class="mb-3 border-bottom pb-2">Ubicación y Contacto</h4>
+                <h4 class="mb-3 border-bottom pb-2">Ubicación, Horarios y Contacto</h4>
+                
                 <div class="row g-3 mb-4 text-start">
                     <div class="col-12">
-                        <label class="form-label d-block">Dirección del taller *</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="tipoDireccion" id="dirSede" value="Sede Central" checked>
-                            <label class="form-check-label" for="dirSede">Misma que la sede del Centro Cultural</label>
+                        <label class="form-label d-block text-primary fw-bold">¿Dónde se dicta el taller? *</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tipoDireccion" id="dirSede" value="Sede" required>
+                            <label class="form-check-label" for="dirSede">En una sede institucional</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="tipoDireccion" id="dirNueva" value="Nueva Dirección">
-                            <label class="form-check-label" for="dirNueva">Taller particular (Otra dirección)</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tipoDireccion" id="dirMapa" value="Mapa">
+                            <label class="form-check-label" for="dirMapa">Taller particular (Ubicar en mapa)</label>
                         </div>
-                        <input type="text" class="form-control mt-2" id="direccionNueva" name="direccionNueva" placeholder="Ej: San Martín 123, Los Polvorines" style="display:none;">
                     </div>
+
+                    <div class="col-12" id="contenedorSedes" style="display:none;">
+                        <label for="sedeSeleccionada" class="form-label">Seleccioná la sede *</label>
+                        <select class="form-select border-primary shadow-sm" id="sedeSeleccionada" name="sedeSeleccionada">
+                            <option value="" disabled selected>Elegí una de nuestras 4 sedes...</option>
+                            <option value="Sede Central Polvorines" data-lat="-34.522070" data-lng="-58.700265" data-dir="Sede central Polvorines">1. Sede Central Los Polvorines</option>
+                            <option value="Sede San Miguel" data-lat="-34.543300" data-lng="-58.712300" data-dir="Sarmiento 1234, San Miguel">2. Sede San Miguel</option>
+                            <option value="Sede Grand Bourg" data-lat="-34.485500" data-lng="-58.728800" data-dir="Callao 456, Grand Bourg">3. Sede Grand Bourg</option>
+                            <option value="Sede Tortuguitas" data-lat="-34.448500" data-lng="-58.750100" data-dir="Directorio 789, Tortuguitas">4. Sede Tortuguitas</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12" id="contenedorMapaFormulario" style="display:none;">
+                        <label class="form-label text-primary fw-bold"><i class="bi bi-pin-map-fill"></i> Hacé clic en el mapa para marcar la ubicación exacta</label>
+                        <div id="mapa-seleccion" style="height: 300px; width: 100%; border-radius: 8px; border: 2px solid #ccc; z-index: 1;" class="mb-2 shadow-sm"></div>
+
+                        <label for="direccionManual" class="form-label mt-2">Dirección del taller particular (Calle y número) *</label>
+                        <input type="text" class="form-control" id="direccionManual" name="direccionManual" placeholder="Ej: San Martín 123, Los Polvorines">
+                    </div>
+
+                    <div class="col-12">
+                        <label for="horarios" class="form-label">Horarios de atención *</label>
+                        <input type="text" class="form-control" id="horarios" name="horarios" placeholder="Ej: Martes y Jueves de 14hs a 18hs" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="lat" class="form-label text-muted">Latitud</label>
+                        <input type="text" class="form-control bg-light text-muted" id="lat" name="lat" readonly placeholder="Se autocompleta" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lng" class="form-label text-muted">Longitud</label>
+                        <input type="text" class="form-control bg-light text-muted" id="lng" name="lng" readonly placeholder="Se autocompleta" required>
+                    </div>
+
                     <div class="col-md-4">
                         <label for="tallerPhoneNumber" class="form-label">Teléfono Taller</label>
                         <input type="tel" class="form-control" id="tallerPhoneNumber" name="tallerPhoneNumber">
@@ -93,9 +126,7 @@ if (!$es_ajax) {
                         <label for="facebook" class="form-label">Facebook</label>
                         <input type="text" class="form-control" id="facebook" name="facebook" placeholder="@usuario">
                     </div>
-                </div>
-
-                <div class="d-grid mt-4">
+                </div> <div class="d-grid mt-4">
                     <button type="submit" class="btn btn-primary btn-lg">Enviar Solicitud</button>
                 </div>
             </form>
@@ -109,6 +140,6 @@ if (!$es_ajax) {
 
 <?php
 if (!$es_ajax) {
-    include 'view/footer.php'; 
+    include 'view/footer.php';
 }
 ?>

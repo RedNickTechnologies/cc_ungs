@@ -14,9 +14,9 @@ if (!$es_ajax) {
 
 <main class="container py-4">
     <div class="d-flex justify-content-center login-bg-container shadow-lg">
-        <div class="col-md-10">
+        <div class="col-md-10 p-2">
             
-            <div class="mt-3 text-start">
+            <div class="mt-3 text-start p-2">
                 <form>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">E-mail</label>
