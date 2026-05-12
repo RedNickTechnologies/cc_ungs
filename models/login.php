@@ -3,10 +3,10 @@ $page_title = "Iniciar sesion";
 $page_description = "Explorá el portfolio de Red Nick Technologies. Sistemas de gestión, bases de datos y desarrollo de páginas web a medida.";
 $page_keywords = "proyectos programación, sistemas de gestión, diseño de páginas web, proyecto universitario programación";
 
-// Chequeamos si la página está siendo solicitada por el modal (AJAX)
+// Esta parte chequea si la página está siendo solicitada por el modal (AJAX)
 $es_ajax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
 
-// Solo incluimos el header si NO es ajax (es decir, si entrás tipeando rednick.com.ar/login.php)
+// Solo se genera la vista del header si el componente anterior no existe para evitar doble replicacion del header
 if (!$es_ajax) {
     include '../cc_ungs/view/header.php';
 }

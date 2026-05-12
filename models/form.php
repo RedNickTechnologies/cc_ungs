@@ -2,9 +2,10 @@
 $page_title = "Registro de Taller";
 $es_ajax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
 
+//verifica que el servidor no este repitiendo el Header en UX.
 if (!$es_ajax) {
     include 'view/header.php';
-    // Si entran directo (sin modal), cargamos Leaflet por si acaso
+    // En el caso de que el usuario intente acceder solo con el link, cargamos Leaflet por si acaso
     echo '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>';
     echo '<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>';
 }
