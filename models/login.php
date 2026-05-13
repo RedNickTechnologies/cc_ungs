@@ -15,16 +15,16 @@ if (!$es_ajax) {
 <main class="container py-4">
     <div class="d-flex justify-content-center login-bg-container shadow-lg">
         <div class="col-md-10 p-2">
-            
+
             <div class="mt-3 text-start p-2">
-                <form>
+                <form action="controllers/loginController.php" method="POST">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">E-mail</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="usuario@ejemplo.com">
+                        <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="usuario@ejemplo.com" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
                     </div>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -33,7 +33,7 @@ if (!$es_ajax) {
                     <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Ingresar</button>
                 </form>
             </div>
-            
+
         </div>
     </div>
 </main>

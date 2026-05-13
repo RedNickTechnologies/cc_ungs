@@ -2,7 +2,7 @@
 $page_title = "Registro de Taller";
 $es_ajax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
 
-//verifica que el servidor no este repitiendo el Header en UX.
+// Verifica que el servidor no este repitiendo el Header en UX.
 if (!$es_ajax) {
     include 'view/header.php';
     // En el caso de que el usuario intente acceder solo con el link, cargamos Leaflet por si acaso
@@ -13,7 +13,7 @@ if (!$es_ajax) {
 
 <main class="container mt-5 py-4">
     <div class="row justify-content-center form-bg-container">
-        <div class="col-lg-20">
+        <div class="col-lg-10">
             <h2 class="mb-4 text-center text-white">Registrar un Nuevo Taller</h2>
             <p class="text-muted text-center mb-4">Completá el formulario para sumar tu taller a la comunidad del centro cultural.</p>
 
@@ -31,12 +31,18 @@ if (!$es_ajax) {
                     </div>
                     <div class="col-md-6">
                         <label for="email" class="form-label">Correo Electrónico *</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <input type="email" class="form-control border-secondary" id="email" name="email" placeholder="ejemplo@correo.com" required>
                     </div>
                     <div class="col-md-6">
                         <label for="userPhoneNumber" class="form-label">Teléfono Personal *</label>
-                        <input type="tel" class="form-control" id="userPhoneNumber" name="userPhoneNumber" required>
+                        <input type="tel" class="form-control border-secondary" id="userPhoneNumber" name="userPhoneNumber" placeholder="Ej: 1123456789" pattern="[0-9]{8,15}" title="Debe contener entre 8 y 15 números sin espacios ni guiones" required>
                     </div>
+
+                    <div class="col-md-6 mt-3">
+                        <label for="userPassword" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control border-secondary" id="userPassword" name="userPassword" required placeholder="Mínimo 6 caracteres">
+                    </div>
+
                 </div>
 
                 <h4 class="mb-3 border-bottom pb-2">Información del Taller</h4>
@@ -68,8 +74,8 @@ if (!$es_ajax) {
                 </div>
 
                 <h4 class="mb-3 border-bottom pb-2">Ubicación, Horarios y Contacto</h4>
-                
                 <div class="row g-3 mb-4 text-start">
+
                     <div class="col-12">
                         <label class="form-label d-block text-primary fw-bold">¿Dónde se dicta el taller? *</label>
                         <div class="form-check form-check-inline">
@@ -101,11 +107,6 @@ if (!$es_ajax) {
                         <input type="text" class="form-control" id="direccionManual" name="direccionManual" placeholder="Ej: San Martín 123, Los Polvorines">
                     </div>
 
-                    <div class="col-12">
-                        <label for="horarios" class="form-label">Horarios de atención *</label>
-                        <input type="text" class="form-control" id="horarios" name="horarios" placeholder="Ej: Martes y Jueves de 14hs a 18hs" required>
-                    </div>
-
                     <div class="col-md-6">
                         <label for="lat" class="form-label text-muted">Latitud</label>
                         <input type="text" class="form-control bg-light text-muted" id="lat" name="lat" readonly placeholder="Se autocompleta" required>
@@ -115,19 +116,42 @@ if (!$es_ajax) {
                         <input type="text" class="form-control bg-light text-muted" id="lng" name="lng" readonly placeholder="Se autocompleta" required>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-12 mt-3">
+                        <label class="form-label fw-bold text-primary">Horarios de atención *</label>
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control border-secondary" id="diasAtencion" name="diasAtencion" placeholder="Días (Ej: Martes y Jueves)" required>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">De</span>
+                                    <input type="time" class="form-control border-secondary" id="horaInicio" name="horaInicio" required>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">A</span>
+                                    <input type="time" class="form-control border-secondary" id="horaFin" name="horaFin" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mt-3">
                         <label for="tallerPhoneNumber" class="form-label">Teléfono Taller</label>
-                        <input type="tel" class="form-control" id="tallerPhoneNumber" name="tallerPhoneNumber">
+                        <input type="tel" class="form-control border-secondary" id="tallerPhoneNumber" name="tallerPhoneNumber" placeholder="Ej: 1123456789" pattern="[0-9]{8,15}" title="Solo números sin espacios">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mt-3">
                         <label for="instagram" class="form-label">Instagram</label>
-                        <input type="text" class="form-control" id="instagram" name="instagram" placeholder="@usuario">
+                        <input type="text" class="form-control border-secondary" id="instagram" name="instagram" placeholder="@usuario">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mt-3">
                         <label for="facebook" class="form-label">Facebook</label>
-                        <input type="text" class="form-control" id="facebook" name="facebook" placeholder="@usuario">
+                        <input type="text" class="form-control border-secondary" id="facebook" name="facebook" placeholder="@usuario">
                     </div>
-                </div> <div class="d-grid mt-4">
+                </div>
+
+                <div class="d-grid mt-4">
                     <button type="submit" class="btn btn-primary btn-lg">Enviar Solicitud</button>
                 </div>
             </form>
