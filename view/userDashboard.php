@@ -1,9 +1,19 @@
 <?php
 // view/user_dashboard.php
+
+// adminDashboard.php
+session_start();
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'moderador') {
+    // Corregimos la ruta hacia la carpeta models
+    header('Location: ../models/login.php'); 
+    exit();
+}
+
 session_start();
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'colaborador') {
-    header('Location: ../login.php'); // Protección de ruta
+      header('Location: ../models/login.php'); 
     exit();
+    // Protección de ruta
 }
 include 'header.php';
 require_once '../config/dbconexion.php';

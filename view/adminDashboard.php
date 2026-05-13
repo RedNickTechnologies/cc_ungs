@@ -2,7 +2,8 @@
 // view/admin_dashboard.php
 session_start();
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'moderador') {
-    header('Location: ../login.php');
+    // Corregimos la ruta hacia la carpeta models
+    header('Location: ../models/login.php'); 
     exit();
 }
 include 'header.php';

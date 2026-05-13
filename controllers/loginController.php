@@ -2,7 +2,9 @@
 // controllers/loginController.php
 session_start();
 
-// 1. Verificamos las rutas a los modelos y base de datos (subiendo un nivel con ../)
+// Encabezado para que el navegador sepa que enviamos JSON
+header('Content-Type: application/json');
+
 require_once '../config/dbconexion.php';
 require_once '../models/user.php';
 
@@ -19,22 +21,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['nombre'] = $usuario['nombre'];
         $_SESSION['rol'] = $usuario['rol'];
 
-        // 2. Redirección exacta respetando tus mayúsculas (adminDashboard.php)
-        if ($usuario['rol'] === 'moderador') {
-            header('Location: ../view/adminDashboard.php');
-        } else {
-            header('Location: ../view/userDashboard.php');
-        }
+        // En lugar de header('Location'), enviamos la ruta de éxito
+        $rutaDestino = ($usuario['rol'] === 'moderador') ? 'view/adminDashboard.php' : 'view/userDashboard.php';
+        
+        echo json_encode([
+            'exito' => true,
+            'mensaje' => '¡Bienvenido!',
+            'redirect' => $rutaDestino
+        ]);
         exit();
     } else {
-        // TRAMPA DE DEPURACIÓN: Si llega aquí, significa que la contraseña o el email están mal en la BD.
-        die("Error: Usuario no encontrado o contraseña incorrecta para el correo: " . $email);
-        
-        // Cuando ya funcione, borra el 'die' de arriba y descomenta esta línea para que vuelva al login:
-        // header('Location: ../models/login.php?error=1');
-        // exit();
+        // Error de credenciales
+        echo json_encode([
+            'exito' => false,
+            'mensaje' => 'Usuario o contraseña incorrectos.'
+        ]);
+        exit();
     }
 } else {
-    die("Error: No se están recibiendo datos por POST. Revisa el method del form.");
+    echo json_encode([
+        'exito' => false,
+        'mensaje' => 'Método no permitido.'
+    ]);
+    exit();
 }
 ?>
