@@ -105,9 +105,9 @@ function inicializarFormulario() {
         });
     }
 
-    // 5. EVENTO SUBMIT DEL FORMULARIO CON INTEGRACIÓN AL BACKEND (AJAX/FETCH)
+    // 5. EVENTO SUBMIT PARA GENERAR SOLO LA VISTA PREVIA (SIN BASE DE DATOS)
     nuevoFormulario.addEventListener("submit", function (evento) {
-        evento.preventDefault();
+        evento.preventDefault(); // Evitamos que la página se recargue
         const datos = new FormData(nuevoFormulario);
 
         // Validación de horarios
@@ -120,127 +120,88 @@ function inicializarFormulario() {
             return;
         }
 
-        // Deshabilitamos el botón mientras se procesa para evitar que el usuario envíe 2 veces
-        const btnSubmit = nuevoFormulario.querySelector('button[type="submit"]');
-        const textoOriginalBtn = btnSubmit.innerHTML;
-        btnSubmit.disabled = true;
-        btnSubmit.innerHTML = 'Enviando...';
+        // --- INICIO DE GENERACIÓN DE TARJETA VISUAL ---
+        const horarios = `${dias} de ${horaInicio} a ${horaFin}hs`;
+        const nombre = datos.get("name");
+        const nombreTaller = datos.get("workspaceName");
+        const descripcion = datos.get("workspaceDescription");
+        const rubro = datos.get("rubro") || "No especificado";
 
-        // Petición al Controlador PHP
-        fetch('models/procesar_registro.php', {
-            method: 'POST',
-            body: datos
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.exito) {
-                    // --- INICIO DE GENERACIÓN DE TARJETA VISUAL (Solo si se guardó en BD) ---
-                    const horarios = `${dias} de ${horaInicio} a ${horaFin}hs`;
-                    const nombre = datos.get("name");
-                    const apellido = datos.get("surname");
-                    const nombreTaller = datos.get("workspaceName");
-                    const descripcion = datos.get("workspaceDescription");
-                    const rubro = datos.get("rubro") || "No especificado";
+        let direccionFinal = "";
+        const tipoDireccion = datos.get("tipoDireccion");
+        if (tipoDireccion === "Sede") {
+            const sedeSelect = document.getElementById("sedeSeleccionada");
+            const opcion = sedeSelect.options[sedeSelect.selectedIndex];
+            direccionFinal = opcion ? opcion.dataset.dir : "Sede Central";
+        } else {
+            direccionFinal = datos.get("direccionManual") || "Taller Particular";
+        }
 
-                    let direccionFinal = "";
-                    const tipoDireccion = datos.get("tipoDireccion");
-                    if (tipoDireccion === "Sede") {
-                        const sedeSelect = document.getElementById("sedeSeleccionada");
-                        const opcion = sedeSelect.options[sedeSelect.selectedIndex];
-                        direccionFinal = opcion ? opcion.dataset.dir : "Sede Central";
-                    } else {
-                        direccionFinal = datos.get("direccionManual") || "Taller Particular";
-                    }
+        const lat = datos.get("lat") || "No definido";
+        const lng = datos.get("lng") || "No definido";
 
-                    const lat = datos.get("lat") || "No definido";
-                    const lng = datos.get("lng") || "No definido";
+        const telefonoTaller = datos.get("tallerPhoneNumber");
+        const instagramUser = datos.get("instagram");
+        const facebookUser = datos.get("facebook");
 
-                    const telefonoTaller = datos.get("tallerPhoneNumber");
-                    const instagramUser = datos.get("instagram");
-                    const facebookUser = datos.get("facebook");
+        // Procesamiento de la imagen cargada localmente
+        const foto = datos.get("foto");
+        let urlImagen = "";
+        if (foto && foto.name !== "") {
+            urlImagen = URL.createObjectURL(foto);
+        }
 
-                    const foto = datos.get("foto");
-                    let urlImagen = "";
-                    if (foto && foto.name !== "") {
-                        urlImagen = URL.createObjectURL(foto);
-                    }
-
-                    const tarjetaHTML = `
-                    <div class="card shadow border-0 mx-auto" style="max-width: 700px; border-radius: 12px; overflow: hidden;">
-                        <div class="row g-0 h-100">
-                            <div class="col-sm-3 d-flex align-items-center justify-content-center bg-light" style="min-height: 220px; border-right: 1px solid #eaeaea;">
-                                ${urlImagen
-                            ? `<img src="${urlImagen}" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="${nombreTaller}">`
-                            : `<div class="text-center p-3">
-                                         <i class="bi bi-image text-secondary" style="font-size: 3rem;"></i><br>
-                                         <span class="text-secondary fw-bold" style="font-size: 0.9rem;">${rubro}</span>
-                                       </div>`
-                        }
-                            </div>
+        const tarjetaHTML = `
+        <div class="card shadow border-0 mx-auto" style="max-width: 700px; border-radius: 12px; overflow: hidden;">
+            <div class="row g-0 h-100">
+                <div class="col-sm-3 d-flex align-items-center justify-content-center bg-light" style="min-height: 220px; border-right: 1px solid #eaeaea;">
+                    ${urlImagen
+                ? `<img src="${urlImagen}" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="${nombreTaller}">`
+                : `<div class="text-center p-3">
+                             <i class="bi bi-image text-secondary" style="font-size: 3rem;"></i><br>
+                             <span class="text-secondary fw-bold" style="font-size: 0.9rem;">${rubro}</span>
+                           </div>`
+            }
+                </div>
+                
+                <div class="col-sm-9">
+                    <div class="card-body text-start py-4 px-4 d-flex flex-column h-100">
+                        <h5 class="card-title text-primary fw-bold mb-1" style="font-size: 1.25rem;">${nombreTaller}</h5>
+                        <p class="card-text text-muted mb-4" style="font-size: 0.95rem;">${descripcion}</p>
+                        
+                        <ul class="list-unstyled mb-0 mt-auto" style="font-size: 0.9rem; color: #444;">
+                            <li class="mb-2"><i class="bi bi-tag-fill text-secondary me-2"></i><strong>Rubro:</strong> ${rubro}</li>
+                            <li class="mb-2"><i class="bi bi-geo-alt-fill text-danger me-2"></i><strong>Ubicación:</strong> ${direccionFinal} <span class="text-muted" style="font-size: 0.75rem;">(Lat: ${lat}, Lng: ${lng})</span></li>
+                            <li class="mb-3"><i class="bi bi-clock-fill text-warning me-2"></i><strong>Horarios:</strong> ${horarios}</li>
                             
-                            <div class="col-sm-9">
-                                <div class="card-body text-start py-4 px-4 d-flex flex-column h-100">
-                                    <h5 class="card-title text-primary fw-bold mb-1" style="font-size: 1.25rem;">${nombreTaller}</h5>
-                                    <p class="card-text text-muted mb-4" style="font-size: 0.95rem;">${descripcion}</p>
-                                    
-                                    <ul class="list-unstyled mb-0 mt-auto" style="font-size: 0.9rem; color: #444;">
-                                        <li class="mb-2"><i class="bi bi-tag-fill text-secondary me-2"></i><strong>Rubro:</strong> ${rubro}</li>
-                                        <li class="mb-2"><i class="bi bi-geo-alt-fill text-danger me-2"></i><strong>Ubicación:</strong> ${direccionFinal} <span class="text-muted" style="font-size: 0.75rem;">(Lat: ${lat}, Lng: ${lng})</span></li>
-                                        <li class="mb-3"><i class="bi bi-clock-fill text-warning me-2"></i><strong>Horarios:</strong> ${horarios}</li>
-                                        
-                                        <li class="border-top pt-3 text-dark fw-bold" style="font-size: 0.95rem;">Detalles de contacto:</li>
-                                        
-                                        ${telefonoTaller ? `<li class="mb-2 ms-1"><i class="bi bi-telephone-fill text-success me-2"></i> ${telefonoTaller} (${nombre})</li>` : ''}
-                                        
-                                        ${instagramUser ? `<li class="mb-2 ms-1">
-                                            <i class="bi bi-instagram me-2" style="background: -webkit-linear-gradient(#405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> 
-                                            @${instagramUser}
-                                        </li>` : ''}
-                                        
-                                        ${facebookUser ? `<li class="mb-0 ms-1"><i class="bi bi-facebook text-primary me-2"></i> @${facebookUser}</li>` : ''}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                            <li class="border-top pt-3 text-dark fw-bold" style="font-size: 0.95rem;">Detalles de contacto:</li>
+                            
+                            ${telefonoTaller ? `<li class="mb-2 ms-1"><i class="bi bi-telephone-fill text-success me-2"></i> ${telefonoTaller} (${nombre})</li>` : ''}
+                            
+                            ${instagramUser ? `<li class="mb-2 ms-1">
+                                <i class="bi bi-instagram me-2" style="background: -webkit-linear-gradient(#405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i> 
+                                @${instagramUser}
+                            </li>` : ''}
+                            
+                            ${facebookUser ? `<li class="mb-0 ms-1"><i class="bi bi-facebook text-primary me-2"></i> @${facebookUser}</li>` : ''}
+                        </ul>
                     </div>
-                `;
+                </div>
+            </div>
+        </div>
+        `;
 
-                    const pantalla = document.getElementById("pantalla-impresion");
-                    pantalla.innerHTML = `
-                    <div class="mensaje-exito text-center mb-4 border-bottom pb-4">
-                        <h3 class="text-success fw-bold"><i class="bi bi-check-circle-fill"></i> ¡Solicitud guardada en Base de Datos!</h3>
-                        <p class="text-muted mb-0">${data.mensaje}</p>
-                    </div>
-                    
-                    <div class="text-center mb-3">
-                        <h5 class="fw-bold text-dark">Vista previa del taller</h5>
-                    </div>
-                    
-                    ${tarjetaHTML}
-                `;
+        const pantalla = document.getElementById("pantalla-impresion");
+        pantalla.innerHTML = `
+        <div class="mensaje-exito text-center mb-4 border-bottom pb-4">
+            <h3 class="text-primary fw-bold"><i class="bi bi-eye-fill"></i> Vista Previa Generada</h3>
+            <p class="text-muted mb-0">Así es como se verá el taller registrado.</p>
+        </div>
+        ${tarjetaHTML}
+        `;
 
-                    pantalla.style.display = "block";
-                    pantalla.scrollIntoView({ behavior: "smooth" });
-
-                    // Limpiamos el formulario original para que quede en blanco
-                    nuevoFormulario.reset();
-                    actualizarVistaUbicacion();
-                    // --- FIN DE GENERACIÓN DE TARJETA VISUAL ---
-
-                } else {
-                    // Si el backend devuelve un error (ej. email duplicado)
-                    alert("Hubo un problema al procesar el registro: " + data.mensaje);
-                }
-            })
-            .catch(error => {
-                console.error('Error en la petición Fetch:', error);
-                alert("Error de conexión con el servidor. Revisa la consola para más detalles.");
-            })
-            .finally(() => {
-                // Sin importar si falló o fue exitoso, volvemos a habilitar el botón
-                btnSubmit.disabled = false;
-                btnSubmit.innerHTML = textoOriginalBtn;
-            });
+        pantalla.style.display = "block";
+        pantalla.scrollIntoView({ behavior: "smooth" });
     });
 }
 

@@ -1,6 +1,6 @@
 let mapaInicio;
 let marcadores = {};
-let listaActual = []; // Aquí guardaremos los talleres que se están mostrando (los 4 o todos)
+let listaActual = []; // Aquí guardaremos la totalidad de los talleres
 
 function cargarMapaPortada(talleresAMostrar) {
     if (mapaInicio) { mapaInicio.remove(); }
@@ -50,6 +50,8 @@ function renderizarLista(talleres) {
                         <div class="card-body p-2">
                             <h6 class="card-title text-primary fw-bold mb-1" style="font-size: 0.9rem;">${taller.nombre}</h6>
                             <p class="card-text small mb-1 text-muted">${taller.rubro}</p>
+                            <p class="card-text small mb-1 text-muted">${taller.colaborador}</p>
+                            <p class="card-text small mb-1 text-muted">${taller.contacto}</p>
                             <p class="mb-0" style="font-size: 0.75rem;"><i class="bi bi-geo-alt-fill text-danger"></i> ${taller.direccion}</p>
                         </div>
                     </div>
@@ -59,40 +61,29 @@ function renderizarLista(talleres) {
     cargarMapaPortada(talleres);
 }
 
-// Lógica de los botones y buscador
+// Lógica de carga inicial y buscador
 document.addEventListener("DOMContentLoaded", () => {
-    const btnDestacados = document.getElementById('btn-destacados');
-    const btnTodos = document.getElementById('btn-todos');
     const buscador = document.getElementById('buscador-index');
 
-    // Función para mostrar solo 4 destacados
-    const mostrarDestacados = () => {
-        btnDestacados.classList.replace('btn-outline-primary', 'btn-primary');
-        btnTodos.classList.replace('btn-primary', 'btn-outline-primary');
-        listaActual = [...baseDeDatosTalleres].sort(() => 0.5 - Math.random()).slice(0, 4);
-        renderizarLista(listaActual);
-    };
-
-    // Función para mostrar todo el directorio
-    const mostrarTodos = () => {
-        btnTodos.classList.replace('btn-outline-primary', 'btn-primary');
-        btnDestacados.classList.replace('btn-primary', 'btn-outline-primary');
+    // Carga inicial por defecto: Clonamos el array completo de la base de datos
+    if (typeof baseDeDatosTalleres !== 'undefined') {
         listaActual = [...baseDeDatosTalleres];
-        renderizarLista(listaActual);
-    };
+    } else {
+        listaActual = [];
+    }
+    
+    // Renderizamos toda la lista sin excepciones
+    renderizarLista(listaActual);
 
-    btnDestacados.addEventListener('click', mostrarDestacados);
-    btnTodos.addEventListener('click', mostrarTodos);
-
-    buscador.addEventListener('input', (e) => {
-        const busqueda = e.target.value.toLowerCase();
-        const filtrados = listaActual.filter(t => 
-            t.nombre.toLowerCase().includes(busqueda) || 
-            t.rubro.toLowerCase().includes(busqueda)
-        );
-        renderizarLista(filtrados);
-    });
-
-    // Carga inicial
-    mostrarDestacados();
+    // El buscador filtra directamente sobre la lista completa
+    if (buscador) {
+        buscador.addEventListener('input', (e) => {
+            const busqueda = e.target.value.toLowerCase();
+            const filtrados = listaActual.filter(t => 
+                t.nombre.toLowerCase().includes(busqueda) || 
+                t.rubro.toLowerCase().includes(busqueda)
+            );
+            renderizarLista(filtrados);
+        });
+    }
 });

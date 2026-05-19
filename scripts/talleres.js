@@ -2,6 +2,7 @@ const baseDeDatosTalleres = [
     {
         id: 1,
         nombre: "Taller de Guitarra Acústica - Primer Acorde",
+        colaborador: "Gustavo Valsk",
         descripcion: "Clases para principiantes. Traer instrumento propio y cuaderno.",
         rubro: "Música",
         direccion: "Sede central Polvorines",
@@ -14,6 +15,7 @@ const baseDeDatosTalleres = [
     {
         id: 2,
         nombre: "Taller de Locución - Lo de Pichón",
+        colaborador: "Marcelo",
         descripcion: "Taller de locución radial con equipo profesional.",
         rubro: "Audiovisual y multimedia",
         direccion: "José León Suárez 1999, Los Polvorines",
@@ -26,6 +28,7 @@ const baseDeDatosTalleres = [
     {
         id: 3,
         nombre: "Iniciación a las Artes Teatrales",
+        colaborador: "Viviana",
         descripcion: "Expresión corporal y pérdida del pánico escénico.",
         rubro: "Artes escénicas",
         direccion: "Romain Rolland 1950, Los Polvorines",
@@ -38,6 +41,7 @@ const baseDeDatosTalleres = [
     {
         id: 4,
         nombre: "Taller de escritura: Horror cósmico",
+        colaborador: "Hector",
         descripcion: "Aprendé a liberar tu imaginación y plasmarla en el papel.",
         rubro: "Escritura y literatura",
         direccion: "Dante Alighieri 1801, Los Polvorines",
@@ -50,6 +54,7 @@ const baseDeDatosTalleres = [
     {
         id: 5,
         nombre: "Taller de Preservación Audiovisual",
+        colaborador: "Manolo",
         descripcion: "Técnicas de preservación de filmes y otro tipo de medios. Orientado a estudiantes de Artes Audiovisuales.",
         rubro: "Audiovisual y multimedia",
         direccion: "Sede central Polvorines",
@@ -62,6 +67,7 @@ const baseDeDatosTalleres = [
     {
         id: 6,
         nombre: "Taller de Cerámica - Hoponoppo",
+        colaborador: "Romina",
         descripcion: "Expresá y moldeá tus mejores creaciones",
         rubro: "Oficios y manualidades",
         direccion: "Sede central Polvorines",

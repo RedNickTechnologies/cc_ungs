@@ -40,14 +40,6 @@ include 'view/header.php';
                             <input type="text" id="buscador-index" class="form-control border-start-0" placeholder="Buscar por nombre o rubro...">
                         </div>
                     </div>
-                    <div class="col-md-6 d-flex gap-2">
-                        <button id="btn-destacados" class="btn btn-primary flex-fill fw-bold">
-                            <i class="bi bi-star-fill"></i> Talleres destacados
-                        </button>
-                        <button id="btn-todos" class="btn btn-outline-primary flex-fill fw-bold">
-                            <i class="bi bi-list-ul"></i> Mostrar todos
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>

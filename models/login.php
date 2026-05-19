@@ -17,7 +17,7 @@ if (!$es_ajax) {
         <div class="col-md-10 p-2">
 
             <div class="mt-3 text-start p-2">
-                <form action="controllers/loginController.php" method="POST">
+                <form action="#">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">E-mail</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="usuario@ejemplo.com" required>
