@@ -182,6 +182,6 @@ Cree el archivo README.TXT describiendo la funcionalidad de mi sistema.
 
 
 ----------------------------------------------------RED NICK TECHNOLOGIES, Gabriel Nicolas Acevedo 2026 reservados todos los derechos----------------------------------------------------
-Para mas informacion y contactarse conmigo:
+Para mas informacion contactarse conmigo:
 https://rednick.com.ar
 
