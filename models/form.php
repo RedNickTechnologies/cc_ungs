@@ -22,12 +22,8 @@ if (!$es_ajax) {
                 <h4 class="mb-3 border-bottom pb-2">Datos del Colaborador</h4>
                 <div class="row g-3 mb-4 text-start">
                     <div class="col-md-6">
-                        <label for="name" class="form-label">Nombre *</label>
+                        <label for="name" class="form-label">Nombre y Apellido *</label>
                         <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="surname" class="form-label">Apellido *</label>
-                        <input type="text" class="form-control" id="surname" name="surname" required>
                     </div>
                     <div class="col-md-6">
                         <label for="email" class="form-label">Correo Electrónico *</label>
